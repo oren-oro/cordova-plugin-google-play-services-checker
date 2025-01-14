@@ -5,6 +5,6 @@ module.exports = {
     cordova.exec(successCallback || emptyFnc, errorCallback || emptyFnc, "GooglePlayServicesChecker", "check", []);
   },
   fix: function (successCallback, errorCallback) {
-    cordova.exec(successCallback || emptyFnc, errorCallback || emptyFnc, "GooglePlayServicesChecker", "fix  ", []);
+    cordova.exec(successCallback || emptyFnc, errorCallback || emptyFnc, "GooglePlayServicesChecker", "fix", []);
   }
 };
