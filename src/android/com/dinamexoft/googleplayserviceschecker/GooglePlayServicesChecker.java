@@ -16,6 +16,21 @@ public class GooglePlayServicesChecker extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("check")) {
+            GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+            int result = googleAPI.isGooglePlayServicesAvailable(this.cordova.getContext());
+            Log.i(APPTAG, "checkPlayServices");
+            JSONObject json = new JSONObject();
+            final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+            if (result != ConnectionResult.SUCCESS) {
+                Log.i(APPTAG, "result != ConnectionResult.SUCCESS");
+                json.put("status", false).put("ConnectionResult", result);
+                json.put("userResolvable", googleAPI.isUserResolvableError(result));
+            } else {
+                json.put("status", true);
+            }
+            callbackContext.success(json);
+            return true;
+        } else if (action.equals("fix")) {
             Log.i(APPTAG, "checkPlayServices");
             JSONObject json = new JSONObject();
             final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
